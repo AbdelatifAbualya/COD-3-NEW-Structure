@@ -300,3 +300,279 @@
                 <p>• Optimized for complex problem-solving and mathematical reasoning</p>
                 <p>• Built-in verification and reflection patterns</p>
               </div>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-sm font-medium text-gray-300 mb-3">Model Path</h4>
+            <div class="bg-dark-600 rounded-lg p-4 border border-dark-500">
+              <input type="text" id="modelPath" value="accounts/fireworks/models/deepseek-v3-0324" readonly
+                     class="w-full bg-dark-700 text-gray-100 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-deepseek-500 font-mono">
+              <div class="text-xs text-gray-400 mt-2">
+                Model path for Fireworks.ai API - DeepSeek V3-0324 is the latest version with enhanced reasoning
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+            <div class="flex items-center text-blue-300 text-sm font-medium mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              DeepSeek Temperature Mapping
+            </div>
+            <div class="text-blue-100 text-xs">
+              DeepSeek V3-0324 uses temperature mapping: API temp 1.0 → Model temp 0.3 for optimal performance
+            </div>
+          </div>
+        </div>
+        
+        <!-- CoD Settings Tab -->
+        <div id="codTab" class="tab-content hidden">
+          <h3 class="text-lg font-medium mb-4 pb-2 border-b border-dark-600">Enhanced Chain of Draft Configuration</h3>
+          
+          <div class="bg-dark-600 border border-dark-500 rounded-lg p-4 mb-5">
+            <h4 class="text-sm font-medium text-gray-300 mb-3">Reasoning Method</h4>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <input type="radio" id="standardReasoning" name="reasoningMethod" value="standard" class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400 focus:ring-deepseek-500 focus:ring-offset-dark-700">
+                <label for="standardReasoning" class="ml-3 block text-sm font-medium text-white">
+                  Standard (No special reasoning)
+                  <div class="text-gray-400 text-xs mt-1">Direct model responses without Chain of Draft methodology.</div>
+                </label>
+              </div>
+              
+              <div class="flex items-start">
+                <input type="radio" id="enhancedCoD" name="reasoningMethod" value="enhanced_cod" checked class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400 focus:ring-deepseek-500 focus:ring-offset-dark-700">
+                <label for="enhancedCoD" class="ml-3 block text-sm font-medium text-white">
+                  Enhanced Chain of Draft with Dual-Stage Verification
+                  <div class="text-gray-400 text-xs mt-1">Advanced CoD with two-stage API calls: Draft + Reflection → Final Verification & Answer</div>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div id="codWordLimitSection" class="mb-5">
+            <h4 class="text-sm font-medium text-gray-300 mb-3">CoD Word Limits (Research-Optimized)</h4>
+            <div class="bg-dark-600 border border-dark-500 rounded-lg p-4 space-y-3">
+              <div class="flex items-start">
+                <input type="radio" id="cod5Words" name="codWordLimit" value="5" checked class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400">
+                <label for="cod5Words" class="ml-3 block text-sm font-medium text-white">
+                  5 words per step
+                  <div class="text-gray-400 text-xs mt-1">Original paper recommendation - maximum efficiency (7.6% of CoT tokens)</div>
+                </label>
+              </div>
+              
+              <div class="flex items-start">
+                <input type="radio" id="cod8Words" name="codWordLimit" value="8" class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400">
+                <label for="cod8Words" class="ml-3 block text-sm font-medium text-white">
+                  8 words per step
+                  <div class="text-gray-400 text-xs mt-1">Enhanced clarity while maintaining efficiency - optimal for research</div>
+                </label>
+              </div>
+              
+              <div class="flex items-start">
+                <input type="radio" id="cod12Words" name="codWordLimit" value="12" class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400">
+                <label for="cod12Words" class="ml-3 block text-sm font-medium text-white">
+                  12 words per step
+                  <div class="text-gray-400 text-xs mt-1">Balanced approach for complex scientific reasoning</div>
+                </label>
+              </div>
+              
+              <div class="flex items-start">
+                <input type="radio" id="cod15Words" name="codWordLimit" value="15" class="w-4 h-4 mt-1 text-deepseek-500 bg-dark-500 border-dark-400">
+                <label for="cod15Words" class="ml-3 block text-sm font-medium text-white">
+                  15 words per step
+                  <div class="text-gray-400 text-xs mt-1">Detailed steps for mathematical and analytical tasks</div>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-lg p-4 mb-5">
+            <h4 class="text-sm font-medium text-purple-300 mb-3 flex items-center gap-2">
+              <span>🧠</span>
+              Adaptive Reasoning Enhancement
+              <span class="bg-purple-600/20 text-purple-300 text-xs px-2 py-1 rounded-full">AI-POWERED</span>
+            </h4>
+            
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <input type="radio" id="adaptiveComplexity" name="reasoningEnhancement" value="adaptive" class="w-4 h-4 mt-1 text-purple-500 bg-dark-500 border-dark-400">
+                <label for="adaptiveComplexity" class="ml-3 block text-sm font-medium text-white">
+                  Adaptive Complexity Detection
+                  <div class="text-purple-200 text-xs mt-1">Automatically adjusts reasoning depth and word limits based on problem complexity analysis</div>
+                </label>
+              </div>
+              
+              <div class="flex items-start">
+                <input type="radio" id="fixedReasoning" name="reasoningEnhancement" value="fixed" checked class="w-4 h-4 mt-1 text-purple-500 bg-dark-500 border-dark-400">
+                <label for="fixedReasoning" class="ml-3 block text-sm font-medium text-white">
+                  Fixed Reasoning Depth
+                  <div class="text-purple-200 text-xs mt-1">Uses consistent reasoning approach and word limits for all problems</div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Parameters Tab -->
+        <div id="parametersTab" class="tab-content hidden">
+          <h3 class="text-lg font-medium mb-4 pb-2 border-b border-dark-600">DeepSeek V3-0324 Parameters</h3>
+          
+          <div class="flex items-center justify-between mb-5 bg-dark-600 rounded-lg p-3 border border-dark-500">
+            <label for="streamingToggle" class="flex items-center cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-deepseek-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <div>
+                <div class="font-medium text-sm">Enable Streaming Responses</div>
+                <div class="text-gray-400 text-xs mt-0.5">See responses appear in real-time as they're generated</div>
+              </div>
+            </label>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="streamingToggle" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-dark-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-deepseek-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-deepseek-600"></div>
+            </label>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label for="temp" class="block text-sm font-medium text-gray-300">Temperature</label>
+              <span id="tempValue" class="text-sm text-gray-400">0.3</span>
+            </div>
+            <input type="range" id="temp" min="0" max="2" step="0.01" value="0.3" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+            <p class="text-xs text-gray-500 mt-1">DeepSeek automatically maps API temperature for optimal performance</p>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label for="topP" class="block text-sm font-medium text-gray-300">Top P</label>
+              <span id="topPValue" class="text-sm text-gray-400">0.9</span>
+            </div>
+            <input type="range" id="topP" min="0" max="1" step="0.01" value="0.9" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+            <p class="text-xs text-gray-500 mt-1">Controls diversity via nucleus sampling.</p>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label for="topK" class="block text-sm font-medium text-gray-300">Top K</label>
+              <span id="topKValue" class="text-sm text-gray-400">40</span>
+            </div>
+            <input type="range" id="topK" min="0" max="100" step="1" value="40" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+            <p class="text-xs text-gray-500 mt-1">Restricts selection to the K most likely tokens.</p>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label for="maxTokens" class="block text-sm font-medium text-gray-300">Max Tokens</label>
+              <span id="maxTokensValue" class="text-sm text-gray-400">8192</span>
+            </div>
+            <input type="range" id="maxTokens" min="1" max="16384" step="128" value="8192" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+            <p class="text-xs text-gray-500 mt-1">Maximum length of the response.</p>
+          </div>
+        </div>
+        
+        <!-- Reflection Tab -->
+        <div id="reflectionTab" class="tab-content hidden">
+          <h3 class="text-lg font-medium mb-4 pb-2 border-b border-dark-600">Advanced Reflection & Verification System</h3>
+          
+          <div class="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/30 rounded-lg p-4 mb-6">
+            <div class="flex items-center text-indigo-300 text-sm font-medium mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Two-Stage API System
+              <span class="bg-indigo-600/20 text-indigo-300 text-xs px-2 py-1 rounded-full ml-2">ENHANCED</span>
+            </div>
+            <div class="text-indigo-100 text-xs space-y-1">
+              <p><strong>Stage 1:</strong> Analysis → CoD Steps → Initial Reflection → Draft Solution</p>
+              <p><strong>Stage 2:</strong> Deep Verification → Error Checking → Final Reflection → Comprehensive Answer</p>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-sm font-medium text-gray-300 mb-4">Reflection Techniques</h4>
+            
+            <div class="space-y-3">
+              <label class="flex items-start p-3 bg-dark-600 rounded-lg border border-dark-500 cursor-pointer hover:border-indigo-500/50 transition">
+                <input type="checkbox" id="enableSelfVerification" checked class="w-4 h-4 mt-1 text-indigo-500 bg-dark-500 border-dark-400 rounded focus:ring-indigo-500">
+                <div class="ml-3">
+                  <div class="font-medium text-white">Self-Verification</div>
+                  <div class="text-gray-400 text-xs mt-1">Model checks its own reasoning steps for logical consistency</div>
+                </div>
+              </label>
+              
+              <label class="flex items-start p-3 bg-dark-600 rounded-lg border border-dark-500 cursor-pointer hover:border-indigo-500/50 transition">
+                <input type="checkbox" id="enableErrorDetection" checked class="w-4 h-4 mt-1 text-indigo-500 bg-dark-500 border-dark-400 rounded focus:ring-indigo-500">
+                <div class="ml-3">
+                  <div class="font-medium text-white">Error Detection & Correction</div>
+                  <div class="text-gray-400 text-xs mt-1">Actively searches for and corrects potential errors in reasoning</div>
+                </div>
+              </label>
+              
+              <label class="flex items-start p-3 bg-dark-600 rounded-lg border border-dark-500 cursor-pointer hover:border-indigo-500/50 transition">
+                <input type="checkbox" id="enableAlternativeSearch" checked class="w-4 h-4 mt-1 text-indigo-500 bg-dark-500 border-dark-400 rounded focus:ring-indigo-500">
+                <div class="ml-3">
+                  <div class="font-medium text-white">Alternative Approach Search</div>
+                  <div class="text-gray-400 text-xs mt-1">Explores alternative solution paths to validate the primary approach</div>
+                </div>
+              </label>
+              
+              <label class="flex items-start p-3 bg-dark-600 rounded-lg border border-dark-500 cursor-pointer hover:border-indigo-500/50 transition">
+                <input type="checkbox" id="enableConfidenceAssessment" checked class="w-4 h-4 mt-1 text-indigo-500 bg-dark-500 border-dark-400 rounded focus:ring-indigo-500">
+                <div class="ml-3">
+                  <div class="font-medium text-white">Confidence Assessment</div>
+                  <div class="text-gray-400 text-xs mt-1">Evaluates confidence levels and identifies areas of uncertainty</div>
+                </div>
+              </label>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-sm font-medium text-gray-300 mb-3">Verification Depth</h4>
+            <div class="bg-dark-600 rounded-lg p-4">
+              <select id="verificationDepth" class="w-full bg-dark-700 text-gray-100 rounded-lg p-3 border border-dark-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="basic">Basic - Quick validation of key steps</option>
+                <option value="standard" selected>Standard - Comprehensive verification</option>
+                <option value="deep">Deep - Exhaustive analysis with multiple approaches</option>
+                <option value="research">Research - Academic-level rigor with extensive validation</option>
+              </select>
+              <div class="text-gray-400 text-xs mt-2">
+                Higher verification depth increases accuracy but requires more processing time
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex justify-end gap-3 pt-4 mt-4 border-t border-dark-600">
+          <button id="closeSettings" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-gray-300 rounded-lg transition">
+            Cancel
+          </button>
+          <button id="saveSettings" class="px-4 py-2 deepseek-gradient hover:from-deepseek-600 hover:to-deepseek-700 text-white rounded-lg transition">
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Boundary -->
+  <div id="errorBoundary" class="fixed inset-0 bg-red-900/90 flex items-center justify-center z-[9999] hidden">
+    <div class="bg-dark-800 rounded-lg p-6 max-w-md mx-4 border border-red-500">
+      <h3 class="text-red-400 font-semibold mb-2">Application Error</h3>
+      <p id="errorMessage" class="text-gray-300 text-sm mb-4">An unexpected error occurred.</p>
+      <button id="reloadApp" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition">
+        Reload Application
+      </button>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="scripts/config.js"></script>
+  <script src="scripts/api-client.js"></script>
+  <script src="scripts/ui-components.js"></script>
+  <script src="scripts/app.js"></script>
+  
+</body>
+</html>

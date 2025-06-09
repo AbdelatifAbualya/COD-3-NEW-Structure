@@ -31,8 +31,5 @@
       "src": "/(.*)", 
       "dest": "/index.html" 
     }
-  ],
-  "env": {
-    "FIREWORKS_API_KEY": "@fireworks_api_key"
-  }
+  ]
 }

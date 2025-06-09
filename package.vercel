@@ -1,0 +1,34 @@
+{
+  "name": "enhanced-cod-studio",
+  "version": "2.0.0",
+  "description": "Enhanced Chain of Draft Studio with DeepSeek V3-0324 and Advanced Reflection",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step needed for static site'",
+    "deploy": "vercel --prod",
+    "start": "vercel dev"
+  },
+  "keywords": [
+    "ai", 
+    "reasoning", 
+    "chain-of-draft", 
+    "deepseek", 
+    "fireworks", 
+    "streaming",
+    "reflection",
+    "verification"
+  ],
+  "author": "Enhanced CoD Studio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/enhanced-cod-studio"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

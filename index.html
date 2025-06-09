@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Chain of Draft Studio - DeepSeek V3-0324</title>
+  
+  <!-- External Dependencies -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#5686f5', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81', 950: '#1e1b4b',
+            },
+            dark: {
+              100: '#d1d5db', 200: '#9ca3af', 300: '#6b7280', 400: '#4b5563',
+              500: '#374151', 600: '#1f2937', 700: '#111827', 800: '#0d1117', 900: '#030712',
+            },
+            deepseek: {
+              100: '#f0f9ff', 200: '#e0f2fe', 300: '#7dd3fc', 400: '#38bdf8',
+              500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+        }
+      }
+    };
+  </script>
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-dark-800 text-gray-100 font-sans min-h-screen overflow-hidden">
+  
+  <!-- Loading Indicator -->
+  <div id="loadingIndicator" class="fixed inset-0 bg-dark-900 flex items-center justify-center z-50">
+    <div class="text-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-deepseek-500 mx-auto mb-4"></div>
+      <p class="text-deepseek-300">Initializing Enhanced CoD Studio...</p>
+    </div>
+  </div>
+
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-80 bg-gradient-to-b from-dark-700 to-dark-800 border-r border-dark-600 flex flex-col overflow-y-auto hidden md:flex shadow-2xl">
+      <!-- Header -->
+      <div class="p-6 border-b border-dark-600/50">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 deepseek-gradient rounded-lg flex items-center justify-center deepseek-glow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-white">Enhanced CoD Studio</h2>
+            <p class="text-xs text-deepseek-300">DeepSeek V3-0324 + Advanced Reflection</p>
+          </div>
+        </div>
+        
+        <button id="newThreadBtn" class="w-full deepseek-gradient hover:from-deepseek-600 hover:to-deepseek-700 text-white py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105 deepseek-glow">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <span class="font-medium">New Research Session</span>
+        </button>
+      </div>
+
+      <!-- System Status -->
+      <div class="p-4 border-b border-dark-600/50">
+        <div class="bg-gradient-to-r from-deepseek-900/20 to-blue-900/20 border border-deepseek-500/30 rounded-lg p-3 mb-3">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-deepseek-400 rounded-full animate-pulse"></div>
+              <span class="text-deepseek-300 text-sm font-medium">DeepSeek V3-0324</span>
+            </div>
+            <span id="modelStatus" class="text-deepseek-400 text-xs bg-deepseek-900/30 px-2 py-1 rounded-full">Active</span>
+          </div>
+          <div class="text-deepseek-200 text-xs">Latest reasoning model with reflection</div>
+        </div>
+      </div>
+
+      <!-- Threads Section -->
+      <div class="flex-1 p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-medium text-gray-300 uppercase tracking-wider">Recent Sessions</h3>
+          <span id="threadCount" class="text-xs bg-dark-600 text-gray-400 px-2 py-1 rounded-full">0</span>
+        </div>
+        <ul id="threadList" class="space-y-2 mb-6"></ul>
+      </div>
+
+      <!-- Export & Actions Section -->
+      <div class="p-4 border-t border-dark-600/50 space-y-3">
+        <div class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+          </svg>
+          Export Research
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2 mb-4">
+          <button id="downloadTxtBtn" class="bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white py-3 px-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 border border-dark-500 hover:border-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="text-xs font-medium">TXT</span>
+          </button>
+          <button id="downloadPdfBtn" class="bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white py-3 px-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 border border-dark-500 hover:border-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-medium">PDF</span>
+          </button>
+        </div>
+
+        <div class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          Quick Actions
+        </div>
+        
+        <div class="space-y-2">
+          <button id="clearThreadBtn" class="w-full bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white py-2.5 px-4 rounded-lg transition-all duration-200 flex items-center gap-3 border border-dark-500 hover:border-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+            <span class="text-sm">Clear Session</span>
+          </button>
+          
+          <button id="deleteThreadBtn" class="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 hover:text-red-300 py-2.5 px-4 rounded-lg transition-all duration-200 flex items-center gap-3 border border-red-600/20 hover:border-red-500/50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+            <span class="text-sm">Delete Session</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Toggle -->
+    <div id="mobileSidebarToggle" class="fixed left-4 top-4 bg-dark-700 p-2 rounded-md shadow-lg z-20 md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobileSidebar" class="fixed inset-0 bg-dark-800 z-30 transform -translate-x-full transition-transform duration-300 md:hidden">
+      <div class="w-full h-full flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b border-dark-600">
+          <h2 class="text-xl font-semibold">Sessions</h2>
+          <button id="closeMobileSidebar" class="p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="flex-1 p-4 overflow-y-auto">
+          <ul id="mobileThreadList" class="space-y-2 mb-4"></ul>
+          <div class="space-y-2">
+            <button id="mobileNewThreadBtn" class="w-full deepseek-gradient hover:from-deepseek-600 hover:to-deepseek-700 text-white py-2 px-4 rounded-md transition flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              New Session
+            </button>
+            <button id="mobileDeleteThreadBtn" class="w-full bg-dark-600 hover:bg-dark-500 text-gray-300 py-2 px-4 rounded-md transition">Delete Session</button>
+            <button id="mobileDownloadTxtBtn" class="w-full bg-dark-600 hover:bg-dark-500 text-gray-300 py-2 px-4 rounded-md transition">Download TXT</button>
+            <button id="mobileClearThreadBtn" class="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 py-2 px-4 rounded-md transition">Clear Session</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header -->
+      <header class="bg-dark-700 border-b border-dark-600 h-16 flex items-center justify-between px-4 md:px-6">
+        <h1 id="pageTitle" class="text-xl font-semibold">Enhanced CoD Studio - DeepSeek V3-0324</h1>
+        <div class="flex items-center gap-3">
+          <div id="currentModelDisplay" class="bg-dark-600 text-sm px-3 py-1.5 rounded-lg flex items-center gap-2">
+            <div class="w-2 h-2 bg-deepseek-400 rounded-full animate-pulse"></div>
+            <span id="modelDisplayText">DeepSeek V3-0324</span>
+            <span id="adaptiveIndicator" class="hidden bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded-full">🧠 Adaptive</span>
+          </div>
+          <button id="openSettings" class="flex items-center gap-1.5 bg-dark-600 hover:bg-dark-500 text-gray-300 px-3 py-1.5 rounded-lg transition">
+            <span>Settings</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Progress Bar -->
+      <div id="progressContainer" class="bg-dark-600 h-2 overflow-hidden hidden">
+        <div id="progressBar" class="progress-bar h-full w-0"></div>
+      </div>
+
+      <!-- Chat Messages Area -->
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-6"></div>
+
+      <!-- Input Area -->
+      <div class="p-4 border-t border-dark-600 bg-dark-700">
+        <!-- Image Preview Area -->
+        <div id="imagePreviewArea" class="mb-4 hidden">
+          <div class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Attached Images
+          </div>
+          <div id="imagePreviewContainer" class="flex flex-wrap gap-2 mb-3"></div>
+        </div>
+
+        <div class="flex items-start gap-3 rounded-xl bg-dark-600 p-3 shadow-lg border border-dark-500 focus-within:border-deepseek-500 transition">
+          <div class="flex-1">
+            <textarea id="userInput" rows="1" class="w-full bg-dark-700 text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-deepseek-500 resize-none text-base" placeholder="Ask a complex research question for enhanced CoD reasoning with DeepSeek V3-0324..."></textarea>
+          </div>
+          <div class="flex flex-col gap-2 mt-1">
+            <button id="sendBtn" class="deepseek-gradient hover:from-deepseek-600 hover:to-deepseek-700 text-white p-3 rounded-lg transition deepseek-glow">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+              </svg>
+            </button>
+            <label for="imageInput" class="bg-purple-600 hover:bg-purple-700 text-white p-2.5 rounded-lg cursor-pointer transition" title="Upload Images">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </label>
+            <label for="fileInput" class="bg-dark-500 hover:bg-dark-400 text-gray-300 p-2.5 rounded-lg cursor-pointer transition" title="Upload Files">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+              </svg>
+            </label>
+          </div>
+        </div>
+        <input type="file" id="imageInput" class="hidden" multiple accept="image/*">
+        <input type="file" id="fileInput" class="hidden" multiple>
+        <div id="attachedFiles" class="mt-3 flex flex-wrap gap-3 hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Notification -->
+  <div id="statusNotification" class="fixed bottom-4 right-4 bg-dark-600 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 z-50"></div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-dark-700 rounded-xl shadow-2xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="p-5 border-b border-dark-600 flex justify-between items-center">
+        <h2 class="text-xl font-semibold">Enhanced AI Configuration - DeepSeek V3-0324</h2>
+        <button id="closeModalX" class="text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="p-5">
+        <!-- Tab Navigation -->
+        <div class="bg-dark-600 rounded-lg p-1 flex mb-5 overflow-x-auto">
+          <button class="tab-btn flex-shrink-0 py-2 px-4 rounded-md text-white bg-deepseek-500" data-tab="modelTab">🤖 Model</button>
+          <button class="tab-btn flex-shrink-0 py-2 px-4 rounded-md text-gray-400 transition" data-tab="codTab">🧠 CoD Settings</button>
+          <button class="tab-btn flex-shrink-0 py-2 px-4 rounded-md text-gray-400 transition" data-tab="parametersTab">⚙️ Parameters</button>
+          <button class="tab-btn flex-shrink-0 py-2 px-4 rounded-md text-gray-400 transition" data-tab="reflectionTab">🔄 Reflection</button>
+        </div>
+        
+        <!-- Tab Contents (include all tabs from previous version without memory tab) -->
+        <div id="modelTab" class="tab-content">
+          <h3 class="text-lg font-medium mb-4 pb-2 border-b border-dark-600">DeepSeek V3-0324 Configuration</h3>
+          <div class="mb-6">
+            <div class="bg-gradient-to-r from-deepseek-900/20 to-blue-900/20 border border-deepseek-500/30 rounded-lg p-4">
+              <div class="flex items-center text-deepseek-300 text-sm font-medium mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                DeepSeek V3-0324 - Latest Reasoning Model
+                <span class="bg-deepseek-600/20 text-deepseek-300 text-xs px-2 py-1 rounded-full ml-2">FIREWORKS.AI</span>
+              </div>
+              <div class="text-deepseek-100 text-xs space-y-1">
+                <p>• 671B total parameters with 37B activated per token (MoE architecture)</p>
+                <p>• Enhanced reasoning capabilities with R1 distillation</p>
+                <p>• Optimized for complex problem-solving and mathematical reasoning</p>
+                <p>• Built-in verification and reflection patterns</p>
+              </div>

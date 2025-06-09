@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "name": "enhanced-cod-studio",
+  "builds": [
+    { 
+      "src": "index.html", 
+      "use": "@vercel/static" 
+    },
+    { 
+      "src": "api/chat.js", 
+      "use": "@vercel/node" 
+    }
+  ],
+  "routes": [
+    { 
+      "src": "/api/chat", 
+      "dest": "/api/chat.js" 
+    },
+    {
+      "src": "/styles/(.*)",
+      "dest": "/styles/$1"
+    },
+    {
+      "src": "/scripts/(.*)",
+      "dest": "/scripts/$1"
+    },
+    { 
+      "src": "/(.*)", 
+      "dest": "/index.html" 
+    }
+  ],
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "FIREWORKS_API_KEY": "@fireworks_api_key"
+  }
+}
